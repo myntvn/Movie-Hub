@@ -23,3 +23,4 @@ rootProject.name = "MovieHub"
 include(":app")
 include(":usecase")
 include(":repository")
+include(":network")
