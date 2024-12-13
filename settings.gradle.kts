@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MovieHub"
 include(":app")
+include(":usecase")
