@@ -6,8 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,19 +48,23 @@ private fun MoviesScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = viewModel.query,
             onValueChange = { viewModel.updateQuery(it) },
-            placeholder = { Text(text = "Search") },
+            placeholder = { Text(text = "Search movies") },
+            trailingIcon = {
+                Icon(Icons.Filled.Search, contentDescription = null)
+            },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = {
                 keyboardManager?.hide()
                 viewModel.search()
             }),
+            shape = CircleShape,
             singleLine = true
         )
 
@@ -73,8 +81,9 @@ private fun MoviesScreen(
         }
     }
 }
+
 @Composable
-fun EmptyPlaceHolder(modifier: Modifier = Modifier) {
+private fun EmptyPlaceHolder(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center

@@ -10,8 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -37,13 +38,15 @@ fun MovieList(
     movies: List<Movie>,
     modifier: Modifier = Modifier,
 ) {
-    LazyColumn(
+    LazyVerticalGrid(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        columns = GridCells.Adaptive(350.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(
-            key = { it.id },
-            items = movies
+            items = movies,
+            key = { movie -> movie.id }
         ) { movie ->
             MovieItem(movie)
         }
@@ -123,9 +126,11 @@ private fun MovieListPreview(modifier: Modifier = Modifier) {
 
     MovieHubTheme {
         Scaffold { padding ->
-            MovieList(movies, modifier = Modifier
-                .padding(padding)
-                .padding(8.dp))
+            MovieList(
+                movies, modifier = Modifier
+                    .padding(padding)
+                    .padding(8.dp)
+            )
         }
     }
 }
