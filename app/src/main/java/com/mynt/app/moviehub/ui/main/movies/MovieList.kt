@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.mynt.app.moviehub.R
@@ -105,25 +106,9 @@ private fun MovieItem(
 
 @Preview(showBackground = true)
 @Composable
-private fun MovieListPreview(modifier: Modifier = Modifier) {
-    val movies = listOf(
-        Movie(
-            id = "001",
-            title = "The Lord of the rings",
-            type = "movie",
-            publishYear = "2001",
-            poster = ""
-        ),
-
-        Movie(
-            id = "002",
-            title = "This is a very long long long long long long long title and should be truncated",
-            type = "movie",
-            publishYear = "2024",
-            poster = ""
-        )
-    )
-
+private fun MovieListPreview(
+    @PreviewParameter(MoviePreviewParameterProvider::class) movies: List<Movie>,
+) {
     MovieHubTheme {
         Scaffold { padding ->
             MovieList(
